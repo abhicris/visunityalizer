@@ -14,23 +14,21 @@ public class FFT : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		spectrum = GetComponent<AudioSource>().GetSpectrumData(128, 0, FFTWindow.BlackmanHarris);
+		spectrum = GetComponent<AudioSource>().GetSpectrumData(1024, 0, FFTWindow.BlackmanHarris);
 
 		int i = 1;
-		while (i < 1023) {
-			Debug.DrawLine(new Vector3(i - 1, spectrum[i] + 10, 0), new Vector3(i, spectrum[i + 1] + 10, 0), Color.red);
-			Debug.DrawLine(new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), Color.cyan);
-			Debug.DrawLine(new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), Color.green);
-			Debug.DrawLine(new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), Color.yellow);
-			i++;
-		}
+        //while (i < 1023) {
+        //    Debug.DrawLine(new Vector3(i - 1, spectrum[i] + 10, 0), new Vector3(i, spectrum[i + 1] + 10, 0), Color.red);
+        //    Debug.DrawLine(new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), Color.cyan);
+        //    Debug.DrawLine(new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), Color.green);
+        //    Debug.DrawLine(new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), Color.yellow);
+        //    i++;
+        //}
 
-//		for (int i = 0; i < visualBuckets.Length; ++i)
- //      {
-//			float x = visualBuckets[i].transform.localScale.x;
-//			float z = visualBuckets[i].transform.localScale.z;
-//			visualBuckets[i].transform.localScale.Set(x, frequencyBuckets[i] * 100, z);
- //      }
+        for (i = 0; i < visualBuckets.Length; ++i)
+        {
+            visualBuckets[i].transform.localScale = new Vector3(0.75f, 100 * spectrum[i], 1);
+        }
 	}
 
 //    void fft(double[] data, bool forward)
